@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Keratin",
+		"structure": "GTCCTGAGA",
+		"rate": .0532
+	},
+	{
+		"name": "Collagen",
+		"structure": "CCTGAGAGT",
+		"rate": .1312
+	},
+	{
+		"name": "Elastin",
+		"structure": "TGAGAGTCC",
+		"rate": .2513
+	}
+]

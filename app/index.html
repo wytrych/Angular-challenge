@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MinIONApp">
+	<head>
+		<title>MinION interface</title>
+		<link rel="stylesheet" href="./css/style.css" type="text/css" />
+		<link rel="stylesheet" href="./css/ngDialog.css" type="text/css" />
+		<link rel="stylesheet" href="./css/ngDialog-theme-default.css" type="text/css" />
+		<meta charset="utf-8" />
+	</head>
+
+	<body ng-controller="SequenceListCtrl">
+	
+		<main>
+		<div class="mainContainer">
+			<div class="tableContainer">
+				<table>
+
+					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
+					<tr><td rowspan="2" class="colorRect"><svg class="rect" viewBox="0 0 100 100"><rect x="0" y="0" width="200" height="200" /></svg></td><td>{{sequence.name}}</td></tr>
+					<tr><td>{{sequence.rate*100 | number: 2}}%</td></tr>
+					</tbody>
+
+				</table>
+
+				<div class="plus" ng-click="dialog()">
+					+
+				
+				</div>
+
+			</div>
+		
+			<div class="chartContainer">
+				<div class="svgContainer">
+					<svg class="chart" viewBox="0 0 200 200">
+					</svg>
+				</div>
+
+				<div class="label">Samples analyzed: 32,992</div>
+				
+			</div>
+		</div>
+
+			<div class="buttons">
+				<input class="b" type="button" name="save" value="SAVE REPORT" />
+				<input class="b" type="button" name="clear" value="CLEAR" />
+				<input class="b" type="button" name="start" value="START" />
+				<input class="b" type="button" name="stop" value="STOP" />
+			</div>
+
+			<div class="dialogBackground">
+
+			</div>
+
+		
+		</main>
+
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/ngDialog.js"></script>
+
+	</body>
+
+
+</html>
