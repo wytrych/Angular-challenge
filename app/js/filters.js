@@ -12,6 +12,9 @@ angular.module('MinIONAppFilters', []).filter('bigNumber', function() {
 		} else if (100 < input && input < 10000000) {
 			order = "M";
 			number = Math.floor(input/10000)/100
+		} else if (100 < input && input < 1000000000) {
+			order = "G";
+			number = Math.floor(input/10000000)/100
 		} else
 			return input;
 
@@ -26,7 +29,7 @@ angular.module('MinIONAppFilters', []).filter('bigNumber', function() {
 .filter('transcriber', function() {
 	return function(input) {
 		var groups = input.split(" ")
-		var output = []
+		var output = " "
 		var acids = {
 			'A': 0,
 			'G': 1,
@@ -35,7 +38,7 @@ angular.module('MinIONAppFilters', []).filter('bigNumber', function() {
 		}
 					
 		groups.forEach(function(d) {
-			output.push(acids[d.charAt(0)]*16+acids[d.charAt(1)]*4+acids[d.charAt(2)])
+			output += (acids[d.charAt(0)]*16+acids[d.charAt(1)]*4+acids[d.charAt(2)])+" "
 		})
 		return output
 	}

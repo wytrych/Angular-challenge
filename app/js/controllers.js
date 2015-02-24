@@ -3,23 +3,36 @@
 var MinIONApp = angular.module('MinIONApp', [
 		'ngDialog',
 		'dataSupplierService',
+		'sequenceMatcherService',
 		'MinIONAppFilters'
 		]);
 
-function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter) {
+function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter) {
 	$scope.id = 0;
 	$scope.buffer = 0;
 	$scope.prevBuffer = 0;
 	$scope.counter = 0;
+	$scope.seqError = false;
 
-
-	console.log(transcriberFilter("AAG AGA AAC"))
-	
 	$scope.startDataCollection = function() {
+		var rate = 10
 		$scope.interval = $interval(function() {
-			$scope.counter += 500;
-			$scope.buffer = DataChunk.getChunk()
-		},10)
+			var bufferSize = 10000
+
+			$scope.counter += bufferSize
+			$scope.buffer = DataChunk.getBuffer(bufferSize)
+
+
+			$scope.sequences.forEach(function(d) {
+				d.rate += SequenceMatcher.count(transcriberFilter(d.structure),$scope.buffer)
+			});
+		},rate)
+	}
+
+	$scope.validate = function(input) {
+		if (angular.isUndefined(input))
+			return false;
+		return true;
 	}
 
 	$scope.stopDataCollection = function() {
@@ -29,12 +42,23 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 	$scope.clear = function() {
 		$scope.buffer = 0;
 		$scope.counter = 0;
+		$scope.sequences.forEach(function(d) {
+			d.rate = 0;
+		})
 	}
 
 
 	$http.get('strands/strands.json').success(function(data) {
 		$scope.sequences = data;
 	});
+
+	$scope.save = function() {
+		$scope.report = $scope.sequences.slice(0)
+		$scope.report.push({samples:$scope.counter,date:$filter('date')(Date.now(),'medium')})
+		$http.post('report.txt', $scope.report).success(function() {
+			$window.location.href = '/report.txt'
+		});
+	}
 
 
 	$scope.dialog = function(seqId) {
@@ -51,10 +75,20 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 	}
 
 	$scope.editSequence = function(editId) {
+		var REGEX = /\S{4,}|[^AGCT\s]|((^|\s)\S{1,2}($|\s))/;
+
+		if (REGEX.test($scope.editSeq.structure)) {
+			$scope.seqError = true;
+			return false
+		}
+
 		if (editId === -1)
 			$scope.sequences.push($scope.editSeq)
 		else
 			$scope.sequences[editId] = angular.copy($scope.editSeq)
+
+		$scope.seqError = false
+		return true
 	}
 
 	$scope.remove = function(removeId) {

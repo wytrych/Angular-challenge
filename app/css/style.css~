@@ -145,17 +145,23 @@ div.dialogBackground {
 	z-index:-1;
 }
 div.dialog {
-	position:absolute;
+	/*position:absolute;
 	left:37%;
 	z-index:2;
 	top:35%;
 	padding:2em;
 	background:#585C9D;
-	display:none;
+	display:none;*/
+	text-align:center;
 }
 .dialog input {
 	margin:.5em;
+	width:80%;
 }
 .dialog .b {
 	width:40%;
+}
+.error {
+	color:white;
+	font-size:.5em;
 }

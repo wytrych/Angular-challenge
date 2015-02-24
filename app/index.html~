@@ -17,7 +17,7 @@
 
 					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
 					<tr><td rowspan="2" class="colorRect"><svg class="rect" viewBox="0 0 100 100"><rect x="0" y="0" width="200" height="200" /></svg></td><td>{{sequence.name}}</td></tr>
-					<tr><td>{{sequence.rate*100 | number: 2}}%</td></tr>
+					<tr><td>{{ (sequence.rate*100)/(counter || 1) | number: 5}} %</td></tr>
 					</tbody>
 
 				</table>
@@ -41,8 +41,8 @@
 		</div>
 
 			<div class="buttons">
-				<input class="b" type="button" name="save" value="SAVE REPORT" />
-				<input class="b" type="button" name="clear" value="CLEAR" />
+				<input class="b" type="button" name="save" value="SAVE REPORT" ng-click="save()" />
+				<input class="b" type="button" name="clear" value="CLEAR" ng-click="clear()" />
 				<input class="b" type="button" name="start" value="START" ng-click="startDataCollection()" />
 				<input class="b" type="button" name="stop" value="STOP" ng-click="stopDataCollection()" />
 			</div>
@@ -60,6 +60,7 @@
 		<script src="js/ngDialog.js"></script>
 		<script src="js/services.js"></script>
 		<script src="js/filters.js"></script>
+		<script src="js/ui-utils.js"></script>
 
 	</body>
 

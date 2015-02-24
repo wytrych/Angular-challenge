@@ -161,3 +161,7 @@ div.dialog {
 .dialog .b {
 	width:40%;
 }
+.error {
+	color:white;
+	font-size:.8em;
+}
