@@ -1,0 +1,43 @@
+var dataSupplierService = angular.module('dataSupplierService', []);
+
+dataSupplierService.factory('DataChunk', [
+	function() {
+		return {
+		  getChunk:
+			function() {
+				return this.getBit()*16+this.getBit()*4+this.getBit()*1;
+			},
+		  getBit:
+			function() {
+				return Math.floor(Math.random() * 3)
+			}
+		}
+	}	
+]);
+
+var acidTranscriber = angular.module('acidTranscriber', []);
+
+acidTranscriber.factory('Transcriber', [
+	function() {
+		return {
+			acids: {
+				'A': 0,
+				'G': 1,
+				'T': 2,
+				'C': 3
+			},
+			process:
+				function(text) {
+					var groups = text.split(" ")
+					var output = []
+					var acids = this.acids
+					
+					groups.forEach(function(d) {
+						output.push(acids[d.charAt(0)]*16+acids[d.charAt(1)]*4+acids[d.charAt(2)])
+					})
+					return output
+				}
+		}
+	}
+])
+

@@ -1,9 +1,36 @@
 'use strict';
 
-var MinIONApp = angular.module('MinIONApp', ['ngDialog']);
+var MinIONApp = angular.module('MinIONApp', [
+		'ngDialog',
+		'dataSupplierService',
+		'MinIONAppFilters'
+		]);
 
-function SequenceListCtrl($scope, ngDialog, $http) {
+function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter) {
 	$scope.id = 0;
+	$scope.buffer = 0;
+	$scope.prevBuffer = 0;
+	$scope.counter = 0;
+
+
+	console.log(transcriberFilter("AAG AGA AAC"))
+	
+	$scope.startDataCollection = function() {
+		$scope.interval = $interval(function() {
+			$scope.counter += 500;
+			$scope.buffer = DataChunk.getChunk()
+		},10)
+	}
+
+	$scope.stopDataCollection = function() {
+		$interval.cancel($scope.interval)
+	}
+
+	$scope.clear = function() {
+		$scope.buffer = 0;
+		$scope.counter = 0;
+	}
+
 
 	$http.get('strands/strands.json').success(function(data) {
 		$scope.sequences = data;
@@ -11,7 +38,7 @@ function SequenceListCtrl($scope, ngDialog, $http) {
 
 
 	$scope.dialog = function(seqId) {
-		if (!angular.isUndefined(seqId)) {
+		if (angular.isDefined(seqId)) {
 			$scope.id = seqId
 			$scope.editSeq = angular.copy($scope.sequences[$scope.id])
 
@@ -35,5 +62,5 @@ function SequenceListCtrl($scope, ngDialog, $http) {
 	}
 }
 
-SequenceListCtrl.$inject = ['$scope','ngDialog','$http'];
+//SequenceListCtrl.$inject = ['$scope','ngDialog','$http','DataChunk','ng','$interval'];
 MinIONApp.controller('SequenceListCtrl', SequenceListCtrl);

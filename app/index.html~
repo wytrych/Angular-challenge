@@ -15,7 +15,7 @@
 			<div class="tableContainer">
 				<table>
 
-					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog(this)" >
+					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
 					<tr><td rowspan="2" class="colorRect"><svg class="rect" viewBox="0 0 100 100"><rect x="0" y="0" width="200" height="200" /></svg></td><td>{{sequence.name}}</td></tr>
 					<tr><td>{{sequence.rate*100 | number: 2}}%</td></tr>
 					</tbody>
@@ -35,7 +35,7 @@
 					</svg>
 				</div>
 
-				<div class="label">Samples analyzed: 32,992</div>
+				<div class="label">Samples analysed: {{counter | bigNumber}}</div>
 				
 			</div>
 		</div>
@@ -43,8 +43,8 @@
 			<div class="buttons">
 				<input class="b" type="button" name="save" value="SAVE REPORT" />
 				<input class="b" type="button" name="clear" value="CLEAR" />
-				<input class="b" type="button" name="start" value="START" />
-				<input class="b" type="button" name="stop" value="STOP" />
+				<input class="b" type="button" name="start" value="START" ng-click="startDataCollection()" />
+				<input class="b" type="button" name="stop" value="STOP" ng-click="stopDataCollection()" />
 			</div>
 
 			<div class="dialogBackground">
@@ -58,6 +58,8 @@
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="js/controllers.js"></script>
 		<script src="js/ngDialog.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/filters.js"></script>
 
 	</body>
 

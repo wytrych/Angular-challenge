@@ -35,16 +35,16 @@
 					</svg>
 				</div>
 
-				<div class="label">Samples analyzed: 32,992</div>
+				<div class="label">Samples analysed: {{counter | bigNumber}}</div>
 				
 			</div>
 		</div>
 
 			<div class="buttons">
 				<input class="b" type="button" name="save" value="SAVE REPORT" />
-				<input class="b" type="button" name="clear" value="CLEAR" />
-				<input class="b" type="button" name="start" value="START" />
-				<input class="b" type="button" name="stop" value="STOP" />
+				<input class="b" type="button" name="clear" value="CLEAR" ng-click="clear()" />
+				<input class="b" type="button" name="start" value="START" ng-click="startDataCollection()" />
+				<input class="b" type="button" name="stop" value="STOP" ng-click="stopDataCollection()" />
 			</div>
 
 			<div class="dialogBackground">
@@ -58,6 +58,8 @@
 		<script src="bower_components/angular-route/angular-route.js"></script>
 		<script src="js/controllers.js"></script>
 		<script src="js/ngDialog.js"></script>
+		<script src="js/services.js"></script>
+		<script src="js/filters.js"></script>
 
 	</body>
 
