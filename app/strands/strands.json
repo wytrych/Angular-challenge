@@ -2,21 +2,21 @@
 	{
 		"name": "Keratin",
 		"structure": "AAA",
-		"rate": 0
+		"rate": 10
 	},
 	{
 		"name": "Something",
 		"structure": "GGG",
-		"rate": 0
+		"rate": 30
 	},
 	{
 		"name": "Collagen",
 		"structure": "TTT",
-		"rate": 0
+		"rate": 50
 	},
 	{
 		"name": "Elastin",
 		"structure": "CCC",
-		"rate": 0
+		"rate": 40
 	}
 ]

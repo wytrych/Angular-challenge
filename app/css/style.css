@@ -88,15 +88,6 @@ table rect {
 	//stroke-width:20;
 	//stroke:black;
 }
-#seq0 rect {
-	fill:green;
-}
-#seq1 rect {
-	fill:red;
-}
-#seq2 rect {
-	fill:blue;
-}
 table {
 	width:100%;
 }

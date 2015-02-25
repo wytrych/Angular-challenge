@@ -5,6 +5,11 @@
 		"rate": 0
 	},
 	{
+		"name": "Something",
+		"structure": "GGG",
+		"rate": 0
+	},
+	{
 		"name": "Collagen",
 		"structure": "TTT",
 		"rate": 0

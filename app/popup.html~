@@ -1,13 +1,13 @@
-<div class="dialog">
+<div class="dialog" >
 	<form name="seqDialog" ng>
 		<input type="text" ng-model="editSeq.name" placeholder="Sequence name"  /><br />
 		<input type="text"  ng-model="editSeq.structure" placeholder="Structure" /><br />
-		<span class="error" ng-show='seqError'>Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
+		<span class="error" ng-show="seqError">Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
 
 		<input type="hidden" ng-model="editSeq.rate" value="0" />
 
-		<input class="b" type="button" name="ok" value="OK" ng-click="editSequence(id) && closeThisDialog()"  />	
-		<input class="b" type="button" name="delete" value="DELETE" ng-click="remove(id);closeThisDialog()" />
+		<input class="b" type="button" name="ok" value="OK" ng-click="editSequence(id)"/>	
+		<input class="b" type="button" name="delete" value="DELETE" ng-click="remove(id)" />
 
 	</form>
 </div>

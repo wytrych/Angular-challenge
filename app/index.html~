@@ -4,11 +4,12 @@
 		<title>MinION interface</title>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" />
 		<link rel="stylesheet" href="./css/ngDialog.css" type="text/css" />
+		<link rel="stylesheet" href="./bower_components\angularjs-nvd3-directives\examples\stylesheets\nv.d3.css" type="text/css" />
 		<link rel="stylesheet" href="./css/ngDialog-theme-default.css" type="text/css" />
 		<meta charset="utf-8" />
 	</head>
 
-	<body ng-controller="SequenceListCtrl">
+	<body ng-controller="SequenceListCtrl" ng-keypress="dialogOpen && enterKey($event,id)">
 	
 		<main>
 		<div class="mainContainer">
@@ -16,7 +17,7 @@
 				<table>
 
 					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
-					<tr><td rowspan="2" class="colorRect"><svg class="rect" viewBox="0 0 100 100"><rect x="0" y="0" width="200" height="200" /></svg></td><td>{{sequence.name}}</td></tr>
+					<tr><td rowspan="2" class="colorRect"><minion-rectangle i="$index" /></td><td>{{sequence.name}}</td></tr>
 					<tr><td>{{ (sequence.rate*100)/(counter || 1) | number: 5}} %</td></tr>
 					</tbody>
 
@@ -31,8 +32,9 @@
 		
 			<div class="chartContainer">
 				<div class="svgContainer">
-					<svg class="chart" viewBox="0 0 200 200">
-					</svg>
+					<bars-chart chart-data="sequences"></bars-chart>
+					<!--<svg class="chart" viewBox="0 0 200 200">
+					</svg>-->
 				</div>
 
 				<div class="label">Samples analysed: {{counter | bigNumber}}</div>
@@ -56,11 +58,13 @@
 
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/d3/d3.js"></script>
+		<script src="bower_components/nvd3/nv.d3.js"></script>
+		<script src="bower_components/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js"></script>
 		<script src="js/controllers.js"></script>
 		<script src="js/ngDialog.js"></script>
 		<script src="js/services.js"></script>
 		<script src="js/filters.js"></script>
-		<script src="js/ui-utils.js"></script>
 
 	</body>
 

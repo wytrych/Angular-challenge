@@ -1,5 +1,6 @@
 var dataSupplierService = angular.module('dataSupplierService', []);
 var sequenceMatcherService = angular.module('sequenceMatcherService', []);
+var colorService = angular.module('colorService', []);
 
 dataSupplierService.factory('DataChunk', [
 	function() {
@@ -41,6 +42,14 @@ sequenceMatcherService.factory('SequenceMatcher', [
 			
 			return count;
 		  }
+		}
+	}
+]);
+
+colorService.factory('Color', [
+	function() {
+		return {
+			get: d3.scale.category20()
 		}
 	}
 ]);

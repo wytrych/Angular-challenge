@@ -7,7 +7,7 @@ dataSupplierService.factory('DataChunk', [
 		  getBuffer:
 			function(bufferSize) {
 				var i
-				var buffer = ""
+				var buffer = " "
 				for (i = 0; i<bufferSize; i++)
 					buffer += this.getChunk()
 				return buffer
