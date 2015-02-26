@@ -106,8 +106,8 @@ sequenceDialogService.factory('SequenceEditor', ['Color',
 	}
 ]);
 
-backendService.factory('BackendConnection', ['$resource','$filter','$window','Color',
-	function($resource,$filter,$window,Color) {
+backendService.factory('BackendConnection', ['$resource','$filter','$window','Color','$http',
+	function($resource,$filter,$window,Color,$http) {
 		return {
 			Data: $resource('strands/strands.json'),
 			save: function(sequences,counter) {

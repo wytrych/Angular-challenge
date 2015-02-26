@@ -119,9 +119,6 @@ backendService.factory('BackendConnection', ['$resource','$filter','$window','Co
 					$window.location.href = '/report.txt'
 				})
 			},
-			/*$resource('phones/:phoneId.json', {}, {
- 			     query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
- 			   })*/
 			get: function() {
 				var data = this.Data.query(function(data) {
 						data.forEach(function(el,i) {
@@ -132,33 +129,8 @@ backendService.factory('BackendConnection', ['$resource','$filter','$window','Co
 
 				return data
 					
-			//		query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-    			//	})
-				//return data
 			}
 	
-	/*function() {
-				return []
-				/*var incomeData = "ERROR"
-
-				console.log($http.get('strands/strands.json').success(function(data) {
-					data.forEach(function(el,i) {
-						el.color = Color.get(i)
-					})
-					incomeData = data
-				}))
-
-				return incomeData*/
-			//}
 		}
 	}
 ]);
-
-/*phonecatServices.factory('Phone', ['$resource',
-  function($resource){
-    return $resource('phones/:phoneId.json', {}, {
-      query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-    });
-  }]);*/
-			     
-
