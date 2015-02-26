@@ -30,15 +30,15 @@ app.post('/report.txt',function(req,res) {
 		data = req.body[i];
 		output += data.name + "\n\tStructure:\t" + data.structure + "\n"
 			+ "\tSamples found:\t"+ data.rate + "\n"
-			+ "\t\t\t" + Math.round(data.rate*100*10000/total)/10000 + " %\n\n";
+			+ "\t\t\t" + Math.round(data.prob*10000)/10000 + " %\n\n";
 	}
-	//console.log(output)
 
 	wstream.write(output)
 	wstream.end();
 })
 
 app.get('/report.txt', function(req, res) {
+	res.type('text')
 	res.download(__dirname + '/' + filename,'report.txt',function(err) {
 		if (!err)
 			fs.unlink(__dirname + '/' + filename)

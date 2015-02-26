@@ -30,7 +30,7 @@ app.post('/report.txt',function(req,res) {
 		data = req.body[i];
 		output += data.name + "\n\tStructure:\t" + data.structure + "\n"
 			+ "\tSamples found:\t"+ data.rate + "\n"
-			+ "\t\t\t" + Math.round(data.rate*100*10000/total)/10000 + " %\n\n";
+			+ "\t\t\t" + Math.round(data.prob*100000)/100000 + " %\n\n";
 	}
 
 	wstream.write(output)

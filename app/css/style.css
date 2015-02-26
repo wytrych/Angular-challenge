@@ -104,6 +104,9 @@ tbody {
 tbody:hover {
 	background:rgba(255,255,255,.5);
 }
+tr {
+	width:100%;
+}
 td.colorRect {
 	width:60%;
 }
@@ -155,4 +158,15 @@ div.dialog {
 .error {
 	color:white;
 	font-size:.8em;
+}
+.grid .tick {
+    stroke: grey;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+.grid path {
+          stroke-width: 0;
+}
+.bars {
+	fill-opacity:.8;
 }
