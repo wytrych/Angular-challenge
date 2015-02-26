@@ -8,14 +8,15 @@ var MinIONApp = angular.module('MinIONApp', [
 		'colorService',
 		'backendService',
 		'ngResource',
+		'dataCollectionService',
 		'MinIONAppFilters'
 		]);
 
-function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection) {
+function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
 	$scope.id = 0;
 	$scope.buffer = 0;
 	$scope.prevBuffer = 0;
-	$scope.counter = 0;
+	$scope.global = {'counter' : 0};
 	$scope.seqError = false;
 	$scope.dialogOpen = false
 	$scope.showWeights = false
@@ -24,18 +25,15 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 	$scope.startDataCollection = function() {
 		var rate = 200
-		$scope.interval = $interval(function() {
-			var bufferSize = 10000
+		var bufferSize = 10000
 
-			$scope.counter += bufferSize
-			$scope.buffer = DataChunk.getBuffer(bufferSize,$scope.weights)
+		DataCollection.start(rate,
+				bufferSize,
+				$scope.global,
+				$scope.buffer,
+				$scope.sequences,
+				$scope.weights)
 
-
-			$scope.sequences.forEach(function(d) {
-				d.rate += SequenceMatcher.count(transcriberFilter(d.structure),$scope.buffer)
-				d.prob = d.rate*100/$scope.counter;
-			});
-		},rate)
 	}
 
 	$scope.validate = function(input) {
@@ -45,12 +43,14 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 	}
 
 	$scope.stopDataCollection = function() {
+	       	DataCollection.stop /*function() {
 		$interval.cancel($scope.interval)
+	}*/
 	}
 
 	$scope.clear = function() {
 		$scope.buffer = 0
-		$scope.counter = 0
+		$scope.global.counter = 0
 		$scope.sequences.forEach(function(d) {
 			d.rate = 0
 			d.prob = 0
@@ -60,17 +60,8 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 	$scope.sequences = BackendConnection.get()
 
-	console.log($scope.sequences)
-	
-	/*	$http.get('strands/strands.json').success(function(data) {
-		$scope.sequences = data;
-		$scope.sequences.forEach(function(el,i) {
-			el.color = Color.get(i)
-		})
-	});*/
-
 	$scope.save = function() {
-		BackendConnection.save($scope.sequences,$scope.counter)
+		BackendConnection.save($scope.sequences,$scope.global.counter)
 	}
 
 
