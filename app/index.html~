@@ -37,7 +37,7 @@
 					</svg>-->
 				</div>
 
-				<div class="label">Samples analysed: {{counter | bigNumber}}</div>
+				<div class="label">Samples analysed: {{global.counter | bigNumber}}</div>
 				
 			</div>
 		</div>

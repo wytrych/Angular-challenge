@@ -9,18 +9,18 @@ angular.module('MinIONAppFilters', []).filter('bigNumber', function() {
 		if (100 < input && input < 100000) {
 			order = "K";
 			number = Math.floor(input/10)/100
-		} else if (100 < input && input < 10000000) {
+		} else if (100 < input && input < 100000000) {
 			order = "M";
 			number = Math.floor(input/10000)/100
-		} else if (100 < input && input < 1000000000) {
+		} else if (100 < input && input < 100000000000) {
 			order = "G";
-			number = Math.floor(input/10000000)/100
+			number = Math.floor(input/100000000)/100
 		} else
 			return input;
 
-		if ((number*100)%100 === 0)
+		if (Math.floor((number*100)%100) === 0)
 			zeros = ".00"
-		else if ((number*100)%10 === 0)
+		else if (Math.floor((number*100)%10) === 0)
 			zeros = "0"
 		
 		return number + zeros + " "+ order;

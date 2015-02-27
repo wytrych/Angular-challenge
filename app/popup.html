@@ -2,7 +2,7 @@
 	<form name="seqDialog" ng>
 		<input type="text" ng-model="editSeq.name" placeholder="Sequence name" autofocus /><br />
 		<input type="text"  ng-model="editSeq.structure" placeholder="Structure" /><br />
-		<span class="error" ng-show="seqError">Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
+		<span class="error" ng-show="global.seqError">Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
 
 		<input type="hidden" ng-model="editSeq.rate" value="0" />
 

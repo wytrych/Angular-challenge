@@ -12,12 +12,13 @@ var MinIONApp = angular.module('MinIONApp', [
 		'MinIONAppFilters'
 		]);
 
-function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
+MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataChunk', '$interval', 'transcriberFilter', 'SequenceMatcher', '$window', '$filter', 'Color', 'SequenceEditor', 'BackendConnection', 'DataCollection',
+	       	function($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
 	$scope.id = 0;
 	$scope.buffer = 0;
 	$scope.prevBuffer = 0;
-	$scope.global = {'counter' : 0};
-	$scope.seqError = false;
+	$scope.global = {'counter' : 0,
+			'seqError': false};
 	$scope.dialogOpen = false
 	$scope.showWeights = false
 
@@ -38,14 +39,13 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 	$scope.validate = function(input) {
 		if (angular.isUndefined(input))
-			return fal
-		return true;
+			return false
+
+		return true
 	}
 
 	$scope.stopDataCollection = function() {
-	       	DataCollection.stop() /*function() {
-		$interval.cancel($scope.interval)
-	}*/
+	       	DataCollection.stop()
 	}
 
 	$scope.clear = function() {
@@ -66,7 +66,7 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 
 	$scope.dialog = function(seqId) {
-		$scope.seqError = false
+		$scope.global.seqError = false
 		$scope.dialogOpen = true
 
 		if (angular.isDefined(seqId)) {
@@ -90,9 +90,9 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 	$scope.editSequence = function(editId) {
 
-		$scope.seqError = !SequenceEditor.editSequence(editId,$scope.editSeq,$scope.sequences)
+		$scope.global.seqError = !SequenceEditor.editSequence(editId,$scope.editSeq,$scope.sequences)
 
-		return !$scope.seqError
+		return !$scope.global.seqError
 
 	}
 
@@ -107,9 +107,6 @@ function SequenceListCtrl($scope, ngDialog, $http, DataChunk, $interval, transcr
 
 		return false
 	}
-}
 
-		
+}])
 
-//SequenceListCtrl.$inject = ['$scope','ngDialog','$http','DataChunk','ng','$interval'];
-MinIONApp.controller('SequenceListCtrl', SequenceListCtrl);
