@@ -37,6 +37,7 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 
 	}
 
+	
 	$scope.validate = function(input) {
 		if (angular.isUndefined(input))
 			return false

@@ -51,23 +51,77 @@ describe('directives test', function() {
 
 
 describe('MinION controllers', function() {
+	var 	scope,
+		controller,
+		element,
+		svg
+	
+
+
+	var strands = 
+[
+	{
+		"name": "Keratin",
+		"structure": "AAA",
+		"prob": 0,
+		"rate": 0
+	},
+	{
+		"name": "Something",
+		"structure": "GGG",
+		"prob": 0,
+		"rate": 0
+	},
+	{
+		"name": "Collagen",
+		"structure": "TTT",
+		"prob": 0,
+		"rate": 0
+	},
+	{
+		"name": "Elastin",
+		"structure": "CCC",
+		"prob": 0,
+		"rate": 0
+	}
+]
+	
 
 	beforeEach(module('MinIONApp'));
+	beforeEach(module('dataSupplierService'));
+	beforeEach(module('sequenceMatcherService'));
+	beforeEach(module('colorService'));
+	beforeEach(module('sequenceDialogService'));
+	beforeEach(module('backendService'));
+	beforeEach(module('dataCollectionService'));
+	beforeEach(module('ngResource'));
 
-	beforeEach(inject(function(_$controler_,$scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
-		$controler = _$controler_
+	beforeEach(inject(function($controller, $rootScope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection, $compile, $httpBackend) {
+		
+			scope = $rootScope.$new()
+			controller = $controller('SequenceListCtrl', { $scope: scope })  
+			element = $compile('<minion-rectangle />')($rootScope);
+			svg = $compile('<svg class="rect" viewBox="0 0 100 100" style="fill:{{sequence.color}}"><rect x="0" y="0" width="200" height="200" /></svg>')($rootScope)
 
+      			$httpBackend.expectGET('strands/strands.json').respond(strands)
+
+			$rootScope.$digest()
 	}))
 
-	describer('controler text', function() {
+	describe('controler text', function() {
 		it('does something', function() {
-			var $scope = {}
 
-			var controler = $controler('SequenceListCtrl', { $scope: $scope,  ngDialog: ngDialog })  
 			
-			return true
+				expect(scope.validate()).toEqual(false);
 			
 
+		})
+
+		it ('Shows svg rectangles', function() {
+
+			expect(element.attr('class')).toContain('rect')
+			expect(element.find('rect').attr('x')).toBe('0')
+			expect(element.html()).toEqual(svg.html())
 		})
 
 	})

@@ -17,7 +17,7 @@
 				<table>
 
 					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
-					<tr><td rowspan="2" class="colorRect"><minion-rectangle i="$index" /></td><td>{{sequence.name}}</td></tr>
+					<tr><td rowspan="2" class="colorRect"><minion-rectangle /></td><td>{{sequence.name}}</td></tr>
 					<tr><td>{{ sequence.prob | number: 5}} %</td></tr>
 					</tbody>
 
@@ -33,8 +33,6 @@
 			<div class="chartContainer">
 				<div class="svgContainer">
 					<bars-chart chart-data="sequences"></bars-chart>
-					<!--<svg class="chart" viewBox="0 0 200 200">
-					</svg>-->
 				</div>
 
 				<div class="label">Samples analysed: {{global.counter | bigNumber}}</div>
