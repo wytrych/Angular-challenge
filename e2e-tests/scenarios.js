@@ -2,9 +2,23 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('my app', function() {
+
+
+describe('MinIONApp', function() {
 
   browser.get('index.html');
+
+  var sequenceList = element.all(by.repeater('sequence in sequences'))
+
+  it('should show 4 sequences', function() {
+
+	  expect(sequenceList.count()).toBe(4)
+	  
+  })
+
+
+
+/*
 
   it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
     expect(browser.getLocationAbsUrl()).toMatch("/view1");
@@ -39,4 +53,6 @@ describe('my app', function() {
     });
 
   });
+
+  */
 });
