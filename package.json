@@ -21,7 +21,7 @@
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "node server.js",
-    "test": "node_modules/karma/bin/karma start test/karma.conf.js",
+    "test": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js  --single-run",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
