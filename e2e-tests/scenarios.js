@@ -16,6 +16,22 @@ describe('MinIONApp', function() {
 	  
   })
 
+  it('should show dialog box after click', function() {
+
+
+	  var dialog = element(by.css('.ngdialog'))
+	  expect(dialog.isPresent()).toBeFalsy()
+
+	  element(by.css('#seq0')).click()
+	  expect(dialog.isPresent()).toBeTruthy()
+
+	  element(by.css('#delete')).click()
+	  browser.sleep(2000)
+	  expect(sequenceList.count()).toBe(3)
+	  //expect(dialog.isPresent()).toBeFalsy()
+
+  })
+
 
 
 /*
