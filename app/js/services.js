@@ -108,8 +108,6 @@ sequenceDialogService.factory('SequenceEditor', ['Color',
 
 			editSequence: function(editId,editSeq,sequences) {
 
-				if (this.counter === -1)
-					this.counter = sequences.length
 		 
 				var REGEX = /\S{4,}|[^AGCT\s]|((^|\s)\S{1,2}($|\s))/;
 
@@ -123,6 +121,8 @@ sequenceDialogService.factory('SequenceEditor', ['Color',
 				if (editId === -1) {
 					editSeq.color = Color.get(this.counter++)
 					sequences.push(editSeq)
+					if (this.counter === -1)
+						this.counter = sequences.length
 				} else
 					sequences[editId] = angular.copy(editSeq)
 

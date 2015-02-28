@@ -85,6 +85,98 @@ describe('MinIONApp services', function() {
 
 	})
 
+	describe('Sequence editor', function() {
+
+		var SequenceEditor
+		var editId = -1
+		var editSeq = {}
+		var sequences = [{'structure': 'AAA', 'name': 'Strand 1'}]
+
+		beforeEach(module('sequenceDialogService'))
+		beforeEach(inject(function(_SequenceEditor_) {
+			SequenceEditor = _SequenceEditor_
+		}))
+
+		it('should not accept empty values', function() {
+
+			editSeq = {'structure': '', 'name': ''}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'AAA', 'name': ''}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'AAA', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
+
+		})
+
+		it('should validate strands', function() {
+
+			//Only capital letters A, G, C or T
+			editSeq = {'structure': 'XXX', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'acg', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			//Only triplets
+
+			editSeq = {'structure': 'AAA A', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'AA', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'AAG CT', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			editSeq = {'structure': 'AAC AAAT', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+
+			//This is fine
+
+			editSeq = {'structure': 'AAC AAA', 'name': 'Strand 2'}
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
+
+
+		})
+
+		it('should increment the counter only if adding a valid strand',function() {
+
+			editId = 0 //Editing a strand
+
+			expect(SequenceEditor.counter).toEqual(-1)
+
+			editSeq = {'structure': 'AAA', 'name': 'Strand 2'}
+
+			expect(sequences[editId]).toNotEqual(editSeq)
+
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
+
+			expect(SequenceEditor.counter).toEqual(-1)
+
+			expect(sequences[editId]).toEqual(editSeq)
+
+
+
+			editId = -1 //Adding a strand
+
+			expect(SequenceEditor.counter).toEqual(-1)
+
+			editSeq = {'structure': '', 'name': 'Strand 2'}
+
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(false)
+			expect(SequenceEditor.counter).toEqual(-1)
+
+			editSeq = {'structure': 'AAA', 'name': 'Strand 2'}
+
+			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
+			expect(SequenceEditor.counter).toEqual(0)
+
+		})
+
+	})
+
 })
 
 
