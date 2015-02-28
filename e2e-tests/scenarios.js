@@ -26,9 +26,9 @@ describe('MinIONApp', function() {
 	  expect(dialog.isPresent()).toBeTruthy()
 
 	  element(by.css('#delete')).click()
-	  browser.sleep(2000)
+	  //browser.sleep(2000)
 	  expect(sequenceList.count()).toBe(3)
-	  //expect(dialog.isPresent()).toBeFalsy()
+	  expect(dialog.isPresent()).toBeFalsy()
 
   })
 
