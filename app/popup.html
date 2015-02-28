@@ -2,11 +2,11 @@
 	<form name="seqDialog" ng>
 		<input type="text" ng-model="editSeq.name" placeholder="Sequence name" autofocus /><br />
 		<input type="text"  ng-model="editSeq.structure" placeholder="Structure" /><br />
-		<span class="error" ng-show="global.seqError">Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
+		<span class="error" id="notice" ng-show="global.seqError">Please use only three letter sequences using capital letters A,G,C or T.</span><br />  
 
 		<input type="hidden" ng-model="editSeq.rate" value="0" />
 
-		<input class="b" type="button" name="ok" value="OK" ng-click="editSequence(id) && dialogClose()"/>	
+		<input class="b" type="button" name="ok" id="ok" value="OK" ng-click="editSequence(id) && dialogClose()"/>	
 		<input class="b" type="button" name="delete" id="delete" value="DELETE" ng-click="remove(id);dialogClose()" /><br />
 		<input type="checkbox" ng-model="showWeights" style="width:1em" /><span ng-show="showWeights"><span class="error" style="font-size:.6em">Weights (demonstration only):<br />A :<input type="number"  ng-model="weights[0]" style="width:4em" />
 		G: <input type="number" ng-model="weights[1]" style="width:4em" />

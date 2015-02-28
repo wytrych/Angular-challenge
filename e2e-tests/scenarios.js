@@ -38,4 +38,37 @@ describe('MinIONApp', function() {
 
   })
 
+  it('should add a new strand and close the dialog if data is valid',function() {
+	  var structureInput = element(by.model('editSeq.structure'))
+
+	  element(by.css('.plus')).click()
+
+	  expect(dialog.isPresent()).toBeTruthy()
+
+	  element(by.model('editSeq.name')).sendKeys('New strand')
+
+	  expect(element(by.css("#notice")).getAttribute('class')).toEqual('error ng-hide')
+
+	  structureInput.sendKeys('XXX')
+	  element(by.css('#ok')).click()
+
+	  expect(element(by.css("#notice")).getAttribute('class')).toEqual('error')
+	  expect(dialog.isPresent()).toBeTruthy()
+
+	  structureInput.clear()
+	  	.then(function() {
+		  structureInput.sendKeys('AAA')
+	  })
+	  element(by.css('#ok')).click()
+
+	  expect(sequenceList.count()).toBe(4)
+
+	  browser.sleep(1000)
+
+	  expect(dialog.isPresent()).toBeFalsy()
+
+
+
+  })
+
 });
