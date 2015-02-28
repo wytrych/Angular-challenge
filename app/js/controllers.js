@@ -18,11 +18,12 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 	$scope.buffer = 0;
 	$scope.prevBuffer = 0;
 	$scope.global = {'counter' : 0,
-			'seqError': false};
+			'seqError': false,
+			'showWeights': false};
 	$scope.dialogOpen = false
-	$scope.showWeights = false
 	$scope.rate = 200
 	$scope.bufferSize = 10000
+	$scope.deleteDisable = false
 
 	$scope.weights = [.25,.25,.25]
 
@@ -75,10 +76,12 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 		if (angular.isDefined(seqId)) {
 			$scope.id = seqId
 			$scope.editSeq = angular.copy($scope.sequences[$scope.id])
+			$scope.deleteDisable = false
 
 		} else {
 			$scope.editSeq = {'name': "", "structure": "", 'prob':0, 'rate':0}
 			$scope.id = -1
+			$scope.deleteDisable = true
 		}
 
 		$scope.openedDialog = ngDialog.open({ template: 'popup.html',className: 'ngdialog-theme-default',scope: $scope });

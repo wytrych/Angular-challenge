@@ -1,38 +1,48 @@
 An AngularJS project simulating a MinION interface.
 
-v 0.0.1
+v 0.1
 
 Copyright 2015 Marcin Wolniewicz.
 
-It should:
+Licensed under GNU GPL v3
+
+Travis job:
+https://travis-ci.org/wytrych/Angular-challenge
+
+**FEATURES**
+
 
 	After pressing the START button:
-		Disable the START button.
-		Enable the STOP button.
-		Start updating the chart.
+		Starts updating the chart and data.
 
 	After pressing the STOP button:
-		Disable the STOP button.
-		Enable the START button.
-		Stop updating the chart.
+		Stops updating the chart and data.
 		
 	After pressing the CLEAR button:
-		Clear the chart.
+		Clears the chart and all data.
 
 	After pressing the SAVE REPORT button:
-		Open a Save file dialog and export data in a text file.
+		Exports data report in a text file.
 
 	After pressing a sequence bar:
-		Open the Edit sequence dialog.
+		Opens the Edit sequence dialog.
 
 	After pressing the + button:
-		Open the Create sequence dialog.
+		Opens the Create sequence dialog.
 
 	After pressing the OK button in the Edit/Create dialog:
-		Update the sequence list.
-		Close the dialog.
+		Validates the data.
+		If not OK shows notice about data format.
+
+		If OK:
+		Updates the sequence list.
+		Closes the dialog.
 	
-	After pressing the Delete button in the Edit/Create dialog:
-		Delete sequence from sequence list.
-		Close the dialog.
+	After pressing the Delete button in the Edit dialog:
+		Deletes sequence from sequence list.
+		Closes the dialog.
+
+
+	**Additional demonstration only feature**
+	In the Edit/Create dialog after clicking checkbox, one can edit the randomness probability (weights) for each of the nucleotide in the generator.
 
