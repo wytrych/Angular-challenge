@@ -149,7 +149,7 @@ describe('MinIONApp services', function() {
 
 			editSeq = {'structure': 'AAA', 'name': 'Strand 2'}
 
-			expect(sequences[editId]).toNotEqual(editSeq)
+			expect(sequences[editId]).not.toEqual(editSeq)
 
 			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
 
