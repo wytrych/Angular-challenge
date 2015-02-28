@@ -15,7 +15,6 @@ dataCollectionService.factory('DataCollection', ['$interval','transcriberFilter'
 			},
 		  start:
 			function(rate,bufferSize,global,buffer,sequences,weights) {
-				//getBuffer = this.getBuffer
 				this.interval = $interval(function() {
 					global.counter += bufferSize
 					buffer = DataChunk.getBuffer(bufferSize,weights)
@@ -31,7 +30,7 @@ dataCollectionService.factory('DataCollection', ['$interval','transcriberFilter'
 ])
 
 dataSupplierService.factory('DataChunk', [
-	function($interval, transcriberFilter, SequenceMatcher) {
+	function($interval) {
 		return {
 		  weights: [],
 		  interval: "",
@@ -49,8 +48,6 @@ dataSupplierService.factory('DataChunk', [
 			},
 		  getChunk:
 			function() {
-				//var bit = this.getBit();
-				//return bit*16+bit*4+bit*1+" ";
 				return this.getBit()*16+this.getBit()*4+this.getBit()*1+" ";
 			},
 		  getBit:
@@ -59,7 +56,6 @@ dataSupplierService.factory('DataChunk', [
 			},
 		  weight:
 			function(randomNumber) {
-				//var weights = [.25,.25,.25] // Sum must be < 1!
 				var range = this.weights[0]
 				var i = 1
 

@@ -21,15 +21,18 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 			'seqError': false};
 	$scope.dialogOpen = false
 	$scope.showWeights = false
+	$scope.rate = 200
+	$scope.bufferSize = 10000
 
 	$scope.weights = [.25,.25,.25]
 
-	$scope.startDataCollection = function() {
-		var rate = 200
-		var bufferSize = 10000
+	$scope.sequences = BackendConnection.get()
 
-		DataCollection.start(rate,
-				bufferSize,
+
+	$scope.startDataCollection = function() {
+
+		DataCollection.start($scope.rate,
+				$scope.bufferSize,
 				$scope.global,
 				$scope.buffer,
 				$scope.sequences,
@@ -37,13 +40,13 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 
 	}
 
-	
+	/*
 	$scope.validate = function(input) {
 		if (angular.isUndefined(input))
 			return false
 
 		return true
-	}
+	}*/
 
 	$scope.stopDataCollection = function() {
 	       	DataCollection.stop()
@@ -59,7 +62,6 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 	}
 
 
-	$scope.sequences = BackendConnection.get()
 
 	$scope.save = function() {
 		BackendConnection.save($scope.sequences,$scope.global.counter)
