@@ -56,9 +56,6 @@ MinIONApp.
 		var newDomain
 		var a,b;
 
-		//y.domain([0, d3.max(data, function(d) { return d.prob; })]);
-		//
-
 		var max = d3.max(data,function(d) { return d.prob/100 })
 		var currentDomain = y.domain()[1]
 
@@ -80,14 +77,15 @@ MinIONApp.
 
 
 		bar
-		    .transition().ease("linear")
+		    .transition()
 		    .attr("transform", function(d, i) { return "translate(" + ( gap + i * barWidth + margin.left)  + ",0)"; })
 
 		bar
 	    	    .select("rect")
 			.attr("style",function(d) {return "fill:"+d.color})
-      			.attr("y", function(d) { return y(d.prob/100); })
       			.attr("width", barWidth - gap)
+			.transition().ease('linear')
+      			.attr("y", function(d) { return y(d.prob/100); })
 
   		bar
 		    .enter().append("g")

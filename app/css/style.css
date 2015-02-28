@@ -29,9 +29,6 @@ input.b {
 	margin-left:2em;
 	font-family:Roboto,sans-serif;
 }
-input.b:hover {
-	background:rgba(255,255,255,.5);
-}
 .chartContainer {
 	display:inline-block;
 	//border: blue solid 3px;
@@ -101,9 +98,6 @@ tbody {
 	border:solid 1px white;
 	transition: background .2s;
 }
-tbody:hover {
-	background:rgba(255,255,255,.5);
-}
 tr {
 	width:100%;
 }
@@ -125,8 +119,11 @@ svg.rect {
 	cursor:pointer;
 	transition: background .2s;
 }
-.plus:hover {
+.plus:hover,input.b:hover, tbody:hover  {
 	background:rgba(255,255,255,.5);
+}
+.plus:active,input.b:active, tbody:active  {
+	background:rgba(255,255,255,1);
 }
 div.dialogBackground {
 	position:absolute;

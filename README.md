@@ -13,9 +13,13 @@ https://travis-ci.org/wytrych/Angular-challenge
 
 
 	After pressing the START button:
+		Disables start button
+		Enables stop button
 		Starts updating the chart and data.
 
 	After pressing the STOP button:
+		Enables start button
+		Disables stop button
 		Stops updating the chart and data.
 		
 	After pressing the CLEAR button:

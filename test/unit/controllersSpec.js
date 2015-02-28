@@ -16,6 +16,7 @@ describe('Filters', function() {
 				expect(bigNumberFilter(10000)).toEqual('10.00 K');
 				expect(bigNumberFilter(100000)).toEqual('0.10 M');
 				expect(bigNumberFilter(1000000)).toEqual('1.00 M');
+				expect(bigNumberFilter(2300000)).toEqual('2.30 M');
 				expect(bigNumberFilter(8300000)).toEqual('8.30 M');
 				expect(bigNumberFilter(10000000)).toEqual('10.00 M');
 				expect(bigNumberFilter(100000000)).toEqual('0.01 G');

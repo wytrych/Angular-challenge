@@ -38,10 +38,16 @@ describe('MinIONApp', function() {
 
   })
 
+  it('should disable the delete button if adding a new strand',function() {
+	  element(by.css('.plus')).click()
+
+	  expect(dialog.isPresent()).toBeTruthy()
+
+	  expect(element(by.css("#delete")).getAttribute('disabled')).toEqual('true')
+  })
+
   it('should add a new strand and close the dialog if data is valid',function() {
 	  var structureInput = element(by.model('editSeq.structure'))
-
-	  element(by.css('.plus')).click()
 
 	  expect(dialog.isPresent()).toBeTruthy()
 

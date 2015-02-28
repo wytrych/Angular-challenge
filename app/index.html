@@ -42,8 +42,8 @@
 			<div class="buttons">
 				<input class="b" type="button" name="save" value="SAVE REPORT" ng-click="save()" />
 				<input class="b" type="button" name="clear" value="CLEAR" ng-click="clear()" />
-				<input class="b" type="button" name="start" value="START" ng-click="startDataCollection()" />
-				<input class="b" type="button" name="stop" value="STOP" ng-click="stopDataCollection()" />
+				<input class="b" type="button" name="start" value="START" ng-disabled="global.collection" ng-click="startDataCollection()" />
+				<input class="b" type="button" name="stop" value="STOP" ng-disabled="!global.collection" ng-click="stopDataCollection()" />
 			</div>
 
 		

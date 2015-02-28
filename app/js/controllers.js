@@ -19,9 +19,10 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 	$scope.prevBuffer = 0;
 	$scope.global = {'counter' : 0,
 			'seqError': false,
-			'showWeights': false};
+			'showWeights': false,
+			'collection': false};
 	$scope.dialogOpen = false
-	$scope.rate = 200
+	$scope.rate = 50
 	$scope.bufferSize = 10000
 	$scope.deleteDisable = false
 
@@ -31,6 +32,7 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 
 
 	$scope.startDataCollection = function() {
+		$scope.global.collection = true
 
 		DataCollection.start($scope.rate,
 				$scope.bufferSize,
@@ -50,6 +52,9 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 	}*/
 
 	$scope.stopDataCollection = function() {
+
+		$scope.global.collection = false
+
 	       	DataCollection.stop()
 	}
 
