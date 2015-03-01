@@ -144,9 +144,9 @@ backendService.factory('BackendConnection', ['$resource','$filter','$window','Co
 			},
 			get: function() {
 				var data = this.Data.query(function(data) {
-						data.forEach(function(el,i) {
-							el.color = Color.get(i)
-						})
+						angular.forEach(data, function(value,key) {
+							this[key].color = Color.get(key)
+						},data)
 						
 					})
 

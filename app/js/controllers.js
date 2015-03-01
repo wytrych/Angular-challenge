@@ -53,10 +53,10 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'Dialog', '$http', 'DataChun
 	$scope.clear = function() {
 		$scope.buffer = 0
 		$scope.global.counter = 0
-		$scope.sequences.forEach(function(d) {
-			d.rate = 0
-			d.prob = 0
-		})
+		angular.forEach($scope.sequences, function(value, key) {
+			this[key].rate = 0
+			this[key].prob = 0
+		}, $scope.sequences)
 	}
 
 
