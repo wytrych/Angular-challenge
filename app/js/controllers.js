@@ -1,7 +1,6 @@
 'use strict';
 
 var MinIONApp = angular.module('MinIONApp', [
-		'ngDialog',
 		'dataSupplierService',
 		'sequenceMatcherService',
 		'sequenceDialogService',
@@ -9,22 +8,23 @@ var MinIONApp = angular.module('MinIONApp', [
 		'backendService',
 		'ngResource',
 		'dataCollectionService',
+		'dialogService',
 		'MinIONAppFilters'
 		]);
 
-MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataChunk', '$interval', 'transcriberFilter', 'SequenceMatcher', '$window', '$filter', 'Color', 'SequenceEditor', 'BackendConnection', 'DataCollection',
-	       	function($scope, ngDialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
-	$scope.id = 0;
+MinIONApp.controller('SequenceListCtrl', ['$scope', 'Dialog', '$http', 'DataChunk', '$interval', 'transcriberFilter', 'SequenceMatcher', '$window', '$filter', 'Color', 'SequenceEditor', 'BackendConnection', 'DataCollection',
+	       	function($scope, Dialog, $http, DataChunk, $interval, transcriberFilter, SequenceMatcher, $window, $filter, Color, SequenceEditor, BackendConnection, DataCollection) {
 	$scope.buffer = 0;
 	$scope.prevBuffer = 0;
 	$scope.global = {'counter' : 0,
 			'seqError': false,
 			'showWeights': false,
+			'dialogOpen' : false,
+			'id' : 0,
+			'deleteDisable' : false,
 			'collection': false};
-	$scope.dialogOpen = false
 	$scope.rate = 50
 	$scope.bufferSize = 10000
-	$scope.deleteDisable = false
 
 	$scope.weights = [.25,.25,.25]
 
@@ -42,14 +42,6 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 				$scope.weights)
 
 	}
-
-	/*
-	$scope.validate = function(input) {
-		if (angular.isUndefined(input))
-			return false
-
-		return true
-	}*/
 
 	$scope.stopDataCollection = function() {
 
@@ -75,33 +67,16 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'ngDialog', '$http', 'DataCh
 
 
 	$scope.dialog = function(seqId) {
-		$scope.global.seqError = false
-		$scope.dialogOpen = true
-
-		if (angular.isDefined(seqId)) {
-			$scope.id = seqId
-			$scope.editSeq = angular.copy($scope.sequences[$scope.id])
-			$scope.deleteDisable = false
-
-		} else {
-			$scope.editSeq = {'name': "", "structure": "", 'prob':0, 'rate':0}
-			$scope.id = -1
-			$scope.deleteDisable = true
-		}
-
-		$scope.openedDialog = ngDialog.open({ template: 'popup.html',className: 'ngdialog-theme-default',scope: $scope });
+		Dialog.open(seqId,$scope.global,$scope.sequences,$scope)
 	}
 
 	$scope.dialogClose = function() {
-		$scope.openedDialog.close()
-		$scope.dialogOpen = false
-
-		return true
+		return Dialog.close($scope.global)
 	}
 
 	$scope.editSequence = function(editId) {
 
-		$scope.global.seqError = !SequenceEditor.editSequence(editId,$scope.editSeq,$scope.sequences)
+		$scope.global.seqError = !SequenceEditor.editSequence(editId,$scope.global.editSeq,$scope.sequences)
 
 		return !$scope.global.seqError
 

@@ -47,11 +47,11 @@ describe('MinIONApp', function() {
   })
 
   it('should add a new strand and close the dialog if data is valid',function() {
-	  var structureInput = element(by.model('editSeq.structure'))
+	  var structureInput = element(by.model('global.editSeq.structure'))
 
 	  expect(dialog.isPresent()).toBeTruthy()
 
-	  element(by.model('editSeq.name')).sendKeys('New strand')
+	  element(by.model('global.editSeq.name')).sendKeys('New strand')
 
 	  expect(element(by.css("#notice")).getAttribute('class')).toEqual('error ng-hide')
 

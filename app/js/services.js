@@ -4,6 +4,7 @@ var colorService = angular.module('colorService', []);
 var sequenceDialogService = angular.module('sequenceDialogService', ['colorService']);
 var backendService = angular.module('backendService', ['ngResource']);
 var dataCollectionService = angular.module('dataCollectionService',['sequenceMatcherService','MinIONAppFilters','dataSupplierService']);
+var dialogService = angular.module('dialogService', ['ngDialog']);
 
 dataCollectionService.factory('DataCollection', ['$interval','transcriberFilter','SequenceMatcher','DataChunk',
 	function($interval, transcriberFilter, SequenceMatcher, DataChunk) {
@@ -160,3 +161,35 @@ backendService.factory('BackendConnection', ['$resource','$filter','$window','Co
 		}
 	}
 ]);
+
+dialogService.factory('Dialog', ['ngDialog',
+	function(ngDialog) {
+		return {
+			openedDialog : "",
+			open: function(seqId,global,sequences,scope) {
+				global.seqError = false
+				global.dialogOpen = true
+
+				if (angular.isDefined(seqId)) {
+					global.id = seqId
+					global.editSeq = angular.copy(sequences[seqId])
+					global.deleteDisable = false
+
+				} else {
+					global.editSeq = {'name': "", "structure": "", 'prob':0, 'rate':0}
+					global.id = -1
+					global.deleteDisable = true
+				}
+
+				this.openedDialog = ngDialog.open({ template: 'popup.html',className: 'ngdialog-theme-default',scope: scope });
+			},
+			close: function(global) {
+				this.openedDialog.close()
+				global.dialogOpen = false
+
+				return true
+			}
+		}
+	}
+		
+])
