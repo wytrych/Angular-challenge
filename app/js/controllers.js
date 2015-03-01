@@ -74,9 +74,9 @@ MinIONApp.controller('SequenceListCtrl', ['$scope', 'Dialog', '$http', 'DataChun
 		return Dialog.close($scope.global)
 	}
 
-	$scope.editSequence = function(editId) {
+	$scope.editSequence = function() {
 
-		$scope.global.seqError = !SequenceEditor.editSequence(editId,$scope.global.editSeq,$scope.sequences)
+		$scope.global.seqError = !SequenceEditor.editSequence($scope.global.id,$scope.global.editSeq,$scope.sequences)
 
 		return !$scope.global.seqError
 
