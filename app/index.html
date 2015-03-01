@@ -2,6 +2,7 @@
 <html lang="en" ng-app="MinIONApp">
 	<head>
 		<title>MinION interface</title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="./css/style.css" type="text/css" />
 		<link rel="stylesheet" href="./css/ngDialog.css" type="text/css" />
 		<link rel="stylesheet" href="./css/ngDialog-theme-default.css" type="text/css" />
@@ -13,14 +14,15 @@
 		<main>
 		<div class="mainContainer">
 			<div class="tableContainer">
-				<table>
+				<div class="table">
 
-					<tbody ng-repeat="sequence in sequences"id="seq{{$index}}" ng-click="dialog($index)" >
-					<tr><td rowspan="2" class="colorRect"><minion-rectangle /></td><td>{{sequence.name}}</td></tr>
-					<tr><td>{{ sequence.prob | number: 5}} %</td></tr>
-					</tbody>
+					<div class="tbody" ng-repeat="sequence in sequences" id="seq{{$index}}" ng-click="dialog($index)" >
+						<div class="colorRect"><minion-rectangle /></div>
+						<div class="data">{{sequence.name}}<br />
+						{{ sequence.prob | number: 5}} %</div>
+					</div>
 
-				</table>
+				</div>
 
 				<div class="plus" ng-click="dialog()">
 					+

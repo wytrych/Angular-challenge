@@ -43,7 +43,8 @@ MinIONApp.
         		)
 			.selectAll("text")
 				.attr("style","text-anchor:middle")
-				.attr("dy",-4)
+				.attr("dy",-2)
+				.attr("dx",2)
 		}
 		redrawChart()
 		chart.append("g").attr("class","barContainer")
@@ -77,7 +78,7 @@ MinIONApp.
 
 
 		bar
-		    .transition()
+		    .transition().duration(100)
 		    .attr("transform", function(d, i) { return "translate(" + ( gap + i * barWidth + margin.left)  + ",0)"; })
 
 		bar
@@ -112,6 +113,6 @@ MinIONApp.directive('minionRectangle', ['Color', function(Color) {
 return {
     restrict: 'AE',
     replace: true,
-    template:function(elem, attrs) { return  '<svg class="rect" viewBox="0 0 100 100" style="fill:{{sequence.color}}"><rect x="0" y="0" width="200" height="200" /></svg>' },
+    template:function(elem, attrs) { return  '<div class="paddingHack"><svg class="rect" viewBox="0 0 100 100" style="fill:{{sequence.color}}"><rect x="0" y="0" width="200" height="200" /></svg></div>' },
   };
 }]);

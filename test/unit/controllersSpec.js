@@ -236,7 +236,7 @@ describe('MinIONApp controllers', function() {
 			scope = $rootScope.$new()
 			controller = $controller('SequenceListCtrl', { $scope: scope })  
 			element = $compile('<minion-rectangle />')($rootScope);
-			svg = $compile('<svg class="rect" viewBox="0 0 100 100" style="fill:{{sequence.color}}"><rect x="0" y="0" width="200" height="200" /></svg>')($rootScope)
+			svg = $compile('<div class="paddingHack"><svg class="rect" viewBox="0 0 100 100" style="fill:{{sequence.color}}"><rect x="0" y="0" width="200" height="200" /></svg></div>')($rootScope)
 
       			$httpBackend.expectGET('strands/strands.json').respond(strands)
 
@@ -249,7 +249,7 @@ describe('MinIONApp controllers', function() {
 
 		it ('shows svg rectangles', function() {
 
-			expect(element.attr('class')).toContain('rect')
+			expect(element.attr('class').indexOf('paddingHack')).not.toEqual(-1)
 			expect(element.find('rect').attr('x')).toBe('0')
 			expect(element.html()).toEqual(svg.html())
 		})
