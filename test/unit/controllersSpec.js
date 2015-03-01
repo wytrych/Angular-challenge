@@ -160,6 +160,8 @@ describe('MinIONApp services', function() {
 
 
 
+			sequences = [{'structure': 'AAA', 'name': 'Strand 1'}]
+
 			editId = -1 //Adding a strand
 
 			expect(SequenceEditor.counter).toEqual(-1)
@@ -172,7 +174,8 @@ describe('MinIONApp services', function() {
 			editSeq = {'structure': 'AAA', 'name': 'Strand 2'}
 
 			expect(SequenceEditor.editSequence(editId,editSeq,sequences)).toEqual(true)
-			expect(SequenceEditor.counter).toEqual(0)
+
+			expect(SequenceEditor.counter).toEqual(2)
 
 		})
 

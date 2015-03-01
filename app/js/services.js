@@ -34,10 +34,6 @@ dataSupplierService.factory('DataChunk', [
 	function($interval) {
 		return {
 		  weights: [],
-		  interval: "",
-		  stop: function() {
-			  $interval.cancel(this.interval)
-		  },
 		  getBuffer:
 			function(bufferSize,weights) {
 				this.weights = weights
@@ -120,10 +116,10 @@ sequenceDialogService.factory('SequenceEditor', ['Color',
 
 
 				if (editId === -1) {
-					editSeq.color = Color.get(this.counter++)
-					sequences.push(editSeq)
 					if (this.counter === -1)
 						this.counter = sequences.length
+					editSeq.color = Color.get(++this.counter)
+					sequences.push(editSeq)
 				} else
 					sequences[editId] = angular.copy(editSeq)
 
