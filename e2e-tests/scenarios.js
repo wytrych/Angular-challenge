@@ -13,7 +13,6 @@ describe('MinIONApp', function() {
   var bars = element.all(by.css('g.bars'))
   var dialog
 
-
   it('should display that 0 samples were analysed', function() {
 	 expect(	 
   	 	element(by.css('.label')).getText().then(function(text) {
@@ -131,7 +130,7 @@ describe('MinIONApp', function() {
 		element.all(by.css(".data")).first().getText().then(function(text) {
 			return parseFloat(text.split(/\s/)[1])
 		})
-	).toBeGreaterThan(0)
+	).toBeGreaterThan(1)
   })
 
   it('should start changing values after pressing Start again', function() {

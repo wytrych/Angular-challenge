@@ -5,7 +5,7 @@ var filename;
 
 app = express();
 
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/build'));
 app.use( bodyParser.json() );
 
 app.listen(8080);

@@ -17,6 +17,19 @@ MinIONApp.
     			.range([height, 0]);
 
 
+		var redrawChart = function() {
+			chart.select("g.grid")
+       			.call(make_y_axis()
+       				.tickSize(-width,20, 0)
+				.tickPadding(-25)
+				.tickFormat(d3.format(".2%"))
+        		)
+			.selectAll("text")
+				.attr("style","text-anchor:middle")
+				.attr("dy",-2)
+				.attr("dx",2)
+		}
+
 		function make_y_axis() {
 		  	return d3.svg.axis()
 			      .scale(y)
@@ -34,18 +47,6 @@ MinIONApp.
 		chart.append("g")            
 		        .attr("class", "grid")
 
-		redrawChart = function() {
-			chart.select("g.grid")
-       			.call(make_y_axis()
-       				.tickSize(-width,20, 0)
-				.tickPadding(-25)
-				.tickFormat(d3.format(".2%"))
-        		)
-			.selectAll("text")
-				.attr("style","text-anchor:middle")
-				.attr("dy",-2)
-				.attr("dx",2)
-		}
 		redrawChart()
 		chart.append("g").attr("class","barContainer")
 
@@ -66,7 +67,7 @@ MinIONApp.
 		    	else
 		    		y.domain([0,currentDomain/2])
 
-		    chart.select("g.grid").selectAll("*").remove()
+		    chart.select("g.grid").selectAll("*").remove();
 		    redrawChart()
 		} 
 
