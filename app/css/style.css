@@ -179,7 +179,7 @@ div.dialog {
 }
 .grid .tick {
     stroke: grey;
-    stroke-opacity: 0.7;
+    stroke-opacity:.7;
     shape-rendering: crispEdges;
 }
 .grid path {

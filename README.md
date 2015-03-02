@@ -1,6 +1,6 @@
 An AngularJS project simulating a MinION interface.
 
-v 0.1
+v 0.2
 
 Copyright 2015 Marcin Wolniewicz.
 
@@ -8,6 +8,12 @@ Licensed under GNU GPL v3
 
 Travis job:
 https://travis-ci.org/wytrych/Angular-challenge
+
+To use:
+
+npm install
+grunt build
+npm start
 
 **FEATURES**
 
