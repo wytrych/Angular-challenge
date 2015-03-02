@@ -120,9 +120,7 @@ describe('MinIONApp', function() {
 	element(by.css('#stop')).click()
 
 	expect(counter = element(by.css('.label')).getText().then(function(text) {
-		 return text.split(" ")
-    	}).then(function(slices) {
-	   	 return parseFloat(slices[2])
+		 return parseFloat(text.split(" ")[2])
   	})).toBeGreaterThan(0)
 
 	expect(	  
@@ -146,9 +144,7 @@ describe('MinIONApp', function() {
 	element(by.css('#stop')).click()
 
 	expect(element(by.css('.label')).getText().then(function(text) {
-		 return text.split(" ")
-    	}).then(function(slices) {
-	   	 return parseFloat(slices[2])
+		 return parseFloat(text.split(" ")[2])
   	})).toBeGreaterThan(counter)
 
   })
@@ -158,9 +154,7 @@ describe('MinIONApp', function() {
 	element(by.css('#clear')).click()
 
 	expect(element(by.css('.label')).getText().then(function(text) {
-		 return text.split(" ")
-    	}).then(function(slices) {
-	   	 return parseInt(slices[2])
+		 return parseInt(text.split(" ")[2])
   	})).toEqual(0)
 
   	browser.sleep(1000)
